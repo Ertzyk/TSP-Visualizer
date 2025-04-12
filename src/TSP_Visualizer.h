@@ -8,15 +8,17 @@
 class TSPVisualizer {
 private:
     sf::RenderWindow window;
+    sf::View view;
     std::vector<Point> points;
     std::vector<int> currentPath;
     std::vector<int> bestPath;
     bool showBest = false;
 public:
     TSPVisualizer(const std::vector<Point>& points);
-    void update_path(const std::vector<int>& path, bool isBest = false);
+    void update_path(const std::vector<int>& path, bool isBest = false, double cost = 0.0);
     void render();
     void loop_until_closed();
+    void configure_view();
 };
 
 #endif
