@@ -13,6 +13,7 @@ private:
     std::vector<int> currentPath;
     std::vector<int> bestPath;
     bool showBest = false;
+    int delayMs = 0;
 public:
     TSPVisualizer(const std::vector<Point>& points);
     void update_path(const std::vector<int>& path, bool isBest = false, double cost = 0.0);

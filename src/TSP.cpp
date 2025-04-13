@@ -35,9 +35,19 @@ double TSP::solve() {
     visited[0] = true;
     visualizer.update_path({});
     std::this_thread::sleep_for(std::chrono::seconds(2));
+
+    auto start = std::chrono::high_resolution_clock::now();
+
+
     tsp_recursive(visited, 0, 1, 0.0, path);
     visualizer.update_path(bestPath, true);
+
+    auto end = std::chrono::high_resolution_clock::now();
+    std::chrono::duration<double> duration = end - start;
+
     std::cout << "\nMinimum path cost: " << minDist << std::endl;
+
+    std::cout << "Execution time (no delay): " << duration.count() << " seconds\n";
     return minDist;
 }
 
