@@ -1,13 +1,12 @@
-#include "TSP.h"
+#include "TSP_Brute_Force.h"
 #include <cfloat>
 #include <iostream>
 #include <thread>
 #include <chrono>
 
-TSP::TSP(std::vector<Point> pts, VisualizerController& vis)
-    : points(std::move(pts)), minDist(DBL_MAX), visualizer(vis) {}
+TSP_Brute_Force::TSP_Brute_Force(std::vector<Point> pts, VisualizerController& vis) : points(std::move(pts)), minDist(DBL_MAX), visualizer(vis) {}
 
-void TSP::tsp_recursive(std::vector<bool>& visited, int current, int count, double cost, std::vector<int>& path) {
+void TSP_Brute_Force::tsp_recursive(std::vector<bool>& visited, int current, int count, double cost, std::vector<int>& path) {
     if (count == points.size()) {
         cost += points[current].distance_to(points[0]);
         if (path.size() > 2 && path[1] > path.back()) return;
@@ -39,7 +38,7 @@ void TSP::tsp_recursive(std::vector<bool>& visited, int current, int count, doub
     }
 }
 
-double TSP::solve() {
+double TSP_Brute_Force::solve() {
     std::vector<bool> visited(points.size(), false);
     std::vector<int> path = {0};
     visited[0] = true;
@@ -70,6 +69,6 @@ double TSP::solve() {
     return minDist;
 }
 
-const std::vector<int>& TSP::get_best_path() const {
+const std::vector<int>& TSP_Brute_Force::get_best_path() const {
     return bestPath;
 }

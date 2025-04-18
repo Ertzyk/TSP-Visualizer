@@ -1,19 +1,17 @@
-#ifndef TSP_NN_H
-#define TSP_NN_H
+#ifndef TSP_GREEDY_H
+#define TSP_GREEDY_H
 
 #include <vector>
 #include "Point.h"
 #include "VisualizerController.h"
 
-class TSP_NN {
+class TSP_Greedy {
 private:
     std::vector<Point> points;
-    std::vector<int> path;
-    double totalDistance = 0.0;
     VisualizerController& visualizer;
-
+    double totalDistance = 0.0;
 public:
-    TSP_NN(std::vector<Point> points, VisualizerController& visualizer);
+    TSP_Greedy(std::vector<Point> points, VisualizerController& visualizer);
     double solve();
 };
 
