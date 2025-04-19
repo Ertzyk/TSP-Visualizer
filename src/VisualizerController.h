@@ -6,6 +6,7 @@
 #include <unordered_map>
 #include <vector>
 #include "Point.h"
+#include <optional>
 
 class VisualizerController {
 private:
@@ -15,6 +16,9 @@ private:
     std::unordered_map<std::pair<int, int>, sf::Color> lineMap;
     std::unordered_map<int, sf::Color> pointColors;
     int delayMs = 0;
+    sf::Texture backgroundTexture;
+    std::optional<sf::Sprite> backgroundSprite;
+    bool hasBackground = false;
     void configure_view();
     void draw_points();
     void draw_lines();

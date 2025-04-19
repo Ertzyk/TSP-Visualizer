@@ -42,3 +42,6 @@
 
 # Ignore VS Code settings
 .vscode/
+
+# Don't commit sensitive API key
+src/config.json

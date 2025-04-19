@@ -44,6 +44,5 @@ double TSP_NN::solve() {
     totalDistance += points[current].distance_to(points[path[0]]);
     visualizer.draw_line(current, path[0], sf::Color::Green);
     visualizer.render();
-    std::cout << "\nNearest Neighbor total distance: " << totalDistance << "\n";
     return totalDistance;
 }

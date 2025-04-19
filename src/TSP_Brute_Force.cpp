@@ -64,7 +64,6 @@ double TSP_Brute_Force::solve() {
     visualizer.draw_line(bestPath.back(), bestPath[0], sf::Color::Green);
     visualizer.render();
     std::chrono::duration<double> duration = end - start;
-    std::cout << "\nMinimum path cost: " << minDist << std::endl;
     std::cout << "Execution time (no delay): " << duration.count() << " seconds\n";
     return minDist;
 }

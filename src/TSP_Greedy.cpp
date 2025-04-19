@@ -88,6 +88,5 @@ double TSP_Greedy::solve(){
         visualizer.render();
         totalDistance += points[a].distance_to(points[b]);
     }
-    cout << "\nGreedy total distance: " << totalDistance << "\n";
     return totalDistance;
 }
