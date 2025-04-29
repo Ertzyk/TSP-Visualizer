@@ -18,9 +18,14 @@ A C++ project for visualizing solutions to the **Travelling Salesman Problem (TS
 ---
 
 ## 🎥 Visualization
-Brute Force on coordinate input:
-<p align="center">
+Brute Force in coordinate input mode:
+<p align="left">
   <img src="assets/demo_brute_force.gif" width="450"/>
+</p>
+
+Nearest Neighbor in city input mode:
+<p align="left">
+  <img src="assets/NN_demo.gif" width="450"/>
 </p>
 
 ---
