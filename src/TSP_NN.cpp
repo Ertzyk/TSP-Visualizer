@@ -5,6 +5,7 @@
 TSP_NN::TSP_NN(std::vector<Point> pts, VisualizerController& vis) : points(std::move(pts)), visualizer(vis) {}
 
 double TSP_NN::solve() {
+    visualizer.sleep(4000);
     int n = static_cast<int>(points.size());
     std::vector<bool> visited(n, false);
     path.clear();
