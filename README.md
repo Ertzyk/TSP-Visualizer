@@ -19,9 +19,7 @@ A C++ project for visualizing solutions to the **Travelling Salesman Problem (TS
 
 ## 🎥 Visualization
 
-<p align="center">
-  <img src="src/assets/demo.gif" width="800"/>
-</p>
+![TSP Demo](src/assets/demo_brute_force.gif)
 
 ---
 
