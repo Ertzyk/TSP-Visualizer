@@ -28,6 +28,11 @@ Nearest Neighbor in city input mode:
   <img src="assets/NN_demo.gif" width="450"/>
 </p>
 
+Greedy in coordinate input mode:
+<p align="left">
+  <img src="assets/greedy_demo.gif" width="450"/>
+</p>
+
 ---
 
 ## 🚀 Getting Started
