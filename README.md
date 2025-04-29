@@ -20,7 +20,7 @@ A C++ project for visualizing solutions to the **Travelling Salesman Problem (TS
 ## 🎥 Visualization
 
 <p align="center">
-  <img src = "assets/demo_brute_force.gif" width="800"/>
+  <img src="src/assets/demo.gif" width="800"/>
 </p>
 
 ---
