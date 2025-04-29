@@ -18,9 +18,9 @@ A C++ project for visualizing solutions to the **Travelling Salesman Problem (TS
 ---
 
 ## 🎥 Visualization
-
+Brute Force on coordinate input:
 <p align="center">
-  <img src="assets/demo_brute_force.gif" width="800"/>
+  <img src="assets/demo_brute_force.gif" width="450"/>
 </p>
 
 ---
