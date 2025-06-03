@@ -6,6 +6,7 @@
 #include "TSP_Brute_Force.h"
 #include "TSP_NN.h"
 #include "TSP_Greedy.h"
+#include "TSP_2Opt.h"
 #include "ConfigLoader.h"
 #include "CityTSPRunner.h"
 #include "AlgorithmType.h"
@@ -29,15 +30,19 @@ ModeType get_input_mode() {
     throw std::runtime_error("Invalid input mode.");
 }
 
-AlgorithmType get_algorithm_choice() {
+AlgorithmType get_algorithm_choice(ModeType mode) {
     char choice;
-    cout << "\nWhich algorithm do you want to use?\n";
-    cout << "[1] Brute-force O(n!)\n[2] Nearest Neighbor O(n^2)\n[3] Greedy O(n^2 * log n)\nEnter 1, 2 or 3: ";
+    cout << "\nWhich algorithm do you want to use?\n[1] Brute-force  O(n!)\n[2] Nearest-Neighbor  O(n^2)\n[3] Greedy  O(n^2 log n)"; 
+    if (mode == ModeType::COORDINATE_INPUT) cout << "\n[4] 2-Opt  Worst case: O(2^n*n^2), Average case: proved O(n^(6 + 1/3)), empirical O(n^3)";
+    cout << "\nEnter choice: ";
     cin >> choice;
-    if (choice == '1') return AlgorithmType::BRUTE_FORCE;
-    if (choice == '2') return AlgorithmType::NEAREST_NEIGHBOR;
-    if (choice == '3') return AlgorithmType::GREEDY;
-    throw std::runtime_error("Invalid algorithm choice.");
+    switch (choice) {
+        case '1': return AlgorithmType::BRUTE_FORCE;
+        case '2': return AlgorithmType::NEAREST_NEIGHBOR;
+        case '3': return AlgorithmType::GREEDY;
+        case '4': if (mode == ModeType::COORDINATE_INPUT) return AlgorithmType::TWO_OPT;
+    }
+    throw runtime_error("Invalid algorithm choice.");
 }
 
 int get_point_count() {
@@ -51,7 +56,7 @@ int get_point_count() {
 int main() {
     try {
         ModeType mode = get_input_mode();
-        AlgorithmType algo = get_algorithm_choice();
+        AlgorithmType algo = get_algorithm_choice(mode);
         if (mode == ModeType::COORDINATE_INPUT) {
             int n = get_point_count();
             if (algo == AlgorithmType::BRUTE_FORCE && n > 10) {
@@ -62,10 +67,10 @@ int main() {
                 if (confirm == 'n' || confirm == 'N') return 0;
             }
             auto points = PointManager::get_points_from_user(n);
-            VisualizerController visualizer(points,
-                algo == AlgorithmType::BRUTE_FORCE ? "TSP Brute Force Visualization" :
-                algo == AlgorithmType::NEAREST_NEIGHBOR ? "TSP Nearest Neighbor Visualization" :
-                "TSP Greedy Visualization");
+            VisualizerController visualizer(
+                points, algo == AlgorithmType::BRUTE_FORCE ? "TSP Brute-force Visualisation" :
+                algo == AlgorithmType::NEAREST_NEIGHBOR ? "TSP Nearest-Neighbour Visualisation" :
+                algo == AlgorithmType::GREEDY ? "TSP Greedy Visualisation" : "TSP 2-Opt Visualisation");
             switch (algo) {
                 case AlgorithmType::BRUTE_FORCE: {
                     TSP_Brute_Force solver(points, visualizer);
@@ -83,6 +88,12 @@ int main() {
                     TSP_Greedy solver(points, visualizer);
                     double result = solver.solve();
                     std::cout << "\nMinimum path cost: " << result << std::endl;
+                    break;
+                }
+                case AlgorithmType::TWO_OPT: {
+                    TSP_2Opt solver(points, visualizer);
+                    double length = solver.solve();
+                    cout << "\nMinimum path cost: " << length << endl;
                     break;
                 }
             }

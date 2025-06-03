@@ -31,6 +31,7 @@ public:
     void render();
     void sleep(int ms);
     void loop_until_closed();
+    void update_path(const std::vector<int>& path, bool final = false);
 };
 
 #endif

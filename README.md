@@ -4,11 +4,11 @@ A C++ project for visualizing solutions to the **Travelling Salesman Problem (TS
 
 ---
 
-## ✨ Features
+## Features
 - Interactive visualization of TSP algorithms:
-  - Brute Force (O(n!))
-  - Nearest Neighbor (O(n²))
-  - Greedy (O(n² log n))
+  - Brute Force (Θ(n!))
+  - Nearest Neighbor (Θ(n²))
+  - Greedy (Θ(n² log n))
 - Two input modes:
   - Manual coordinate input
   - Real-world Polish cities (via OpenRouteService API)
@@ -17,7 +17,7 @@ A C++ project for visualizing solutions to the **Travelling Salesman Problem (TS
 
 ---
 
-## 🎥 Visualization
+## Visualization
 Brute Force in coordinate input mode:
 <p align="left">
   <img src="assets/demo_brute_force.gif" width="450"/>
@@ -35,9 +35,9 @@ Greedy in coordinate input mode:
 
 ---
 
-## 🚀 Getting Started
+## Getting Started
 
-### 🔧 Prerequisites
+### Prerequisites
 - **SFML 3.0.0**:
   - Place includes in `C:\SFML\include` and libs in `C:\SFML\lib`
   - Add `C:\SFML\bin` to your system `PATH`so the runtime can find required DLLs
@@ -45,7 +45,7 @@ Greedy in coordinate input mode:
   - Place includes in `C:\libs\curl\include` and libs in `C:\libs\curl\lib`
 - **OpenRouteService API key**: Required for city mode
 
-### 🔑 API Key Setup
+### API Key Setup
 1. Sign up at [openrouteservice.org](https://openrouteservice.org)
 2. Copy your API key
 3. Duplicate the config template:
@@ -58,11 +58,10 @@ Greedy in coordinate input mode:
 }
 ```
 
-> ⚠️ Never commit your personal `config.json` file. It contains your private API key. Use `config.example.json` as a template for others to follow.
 
 ---
 
-## 🏃‍♂️ Running the Program
+## Running the Program
 
 Compile with this line:
 ```bash
@@ -80,7 +79,7 @@ Follow the terminal prompts to:
 
 ---
 
-## 📁 Project Structure
+## Project Structure
 ```
 src/
 ├── assets/                  # Background map

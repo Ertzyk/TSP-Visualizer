@@ -4,7 +4,8 @@
 enum class AlgorithmType {
     BRUTE_FORCE,
     NEAREST_NEIGHBOR,
-    GREEDY
+    GREEDY,
+    TWO_OPT
 };
 
 #endif

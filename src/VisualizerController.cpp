@@ -123,3 +123,13 @@ void VisualizerController::loop_until_closed() {
         }
     }
 }
+
+void VisualizerController::update_path(const std::vector<int>& path, bool final) {
+    clear_all_lines();
+    for (size_t i = 0; i < path.size(); i++) {
+        int from = path[i];
+        int to = path[(i + 1) % path.size()];
+        draw_line(from, to, sf::Color::Green);
+    }
+    render();
+}

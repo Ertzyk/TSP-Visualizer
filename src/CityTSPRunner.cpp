@@ -20,7 +20,7 @@ void CityTSPRunner::run() {
         const double POLAND_MAX_LAT = 55.5;
         const double POLAND_MIN_LON = 13.5;
         const double POLAND_MAX_LON = 24.7;
-        for (int i = 0; i < static_cast<int>(latlon.size()); ++i) {
+        for (int i = 0; i < static_cast<int>(latlon.size()); i++) {
             double lat = latlon[i].first;
             double lon = latlon[i].second;
             int x = static_cast<int>((lon - POLAND_MIN_LON) / (POLAND_MAX_LON - POLAND_MIN_LON) * 1000);
