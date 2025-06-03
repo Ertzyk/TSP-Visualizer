@@ -9,6 +9,7 @@ A C++ project for visualizing solutions to the **Travelling Salesman Problem (TS
   - Brute Force (Θ(n!))
   - Nearest Neighbor (Θ(n²))
   - Greedy (Θ(n² log n))
+  - 2-Opt (Worst-case O(n² · 2ⁿ), average-case O(n³) (empirical))
 - Two input modes:
   - Manual coordinate input
   - Real-world Polish cities (via OpenRouteService API)
@@ -31,6 +32,11 @@ Nearest Neighbor in city input mode:
 Greedy in coordinate input mode:
 <p align="left">
   <img src="assets/greedy_demo.gif" width="450"/>
+</p>
+
+2-opt in coordinate input mode:
+<p align="left">
+  <img src="assets/2-opt_demo.gif" width="450"/>
 </p>
 
 ---
@@ -92,3 +98,23 @@ src/
 ├── TSP_*.cpp               # Algorithms
 └── ...                     # Core logic and visualization
 ```
+---
+
+## External Libraries Used
+
+This project relies on the following third-party C++ libraries:
+
+### SFML
+- **Purpose**: Graphics, windowing, and input.
+- **Used in**: `VisualizerController`
+- **Website**: [sfml-dev.org](https://www.sfml-dev.org)
+
+### libcurl
+- **Purpose**: HTTP requests to OpenRouteService.
+- **Used in**: `OpenRouteServiceClient`
+- **Website**: [curl.se](https://curl.se)
+
+### nlohmann/json
+- **Purpose**: JSON parsing and serialization.
+- **Used in**: `OpenRouteServiceClient`
+- **Website**: [github.com/nlohmann/json](https://github.com/nlohmann/json)
