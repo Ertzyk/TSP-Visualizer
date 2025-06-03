@@ -12,18 +12,20 @@ double TSP_NN::solve(){
     int current = 0;
     visited[current] = true;
     path.push_back(current);
-    for (int step = 1; step < n; ++step) {
+    visualizer.render();
+    visualizer.sleep(1000);
+    for(int step = 1; step < n; step++){
         int next = -1;
         double bestDist = std::numeric_limits<double>::max();
-        for (int i = 0; i < n; ++i) {
+        for (int i = 0; i < n; i++) {
             if (!visited[i]) {
                 double dist = points[current].distance_to(points[i]);
                 visualizer.draw_line(current, i, sf::Color::Red);
                 visualizer.render();
-                visualizer.sleep(300);
+                visualizer.sleep(180);
                 visualizer.clear_line(current, i);
                 visualizer.render();
-                visualizer.sleep(100);
+                visualizer.sleep(50);
                 if (dist < bestDist) {
                     bestDist = dist;
                     next = i;

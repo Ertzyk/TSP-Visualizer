@@ -33,7 +33,7 @@ ModeType get_input_mode() {
 AlgorithmType get_algorithm_choice(ModeType mode) {
     char choice;
     cout << "\nWhich algorithm do you want to use?\n[1] Brute-force  O(n!)\n[2] Nearest-Neighbor  O(n^2)\n[3] Greedy  O(n^2 log n)"; 
-    if (mode == ModeType::COORDINATE_INPUT) cout << "\n[4] 2-Opt  Worst case: O(2^n*n^2), Average case: proved O(n^(6 + 1/3)), empirical O(n^3)";
+    if (mode == ModeType::COORDINATE_INPUT) cout << "\n[4] 2-opt  Worst case: O(2^n*n^2), Average case: proved O(n^(6 + 1/3)), empirical O(n^3)";
     cout << "\nEnter choice: ";
     cin >> choice;
     switch (choice) {
@@ -70,7 +70,7 @@ int main() {
             VisualizerController visualizer(
                 points, algo == AlgorithmType::BRUTE_FORCE ? "TSP Brute-force Visualisation" :
                 algo == AlgorithmType::NEAREST_NEIGHBOR ? "TSP Nearest-Neighbour Visualisation" :
-                algo == AlgorithmType::GREEDY ? "TSP Greedy Visualisation" : "TSP 2-Opt Visualisation");
+                algo == AlgorithmType::GREEDY ? "TSP Greedy Visualisation" : "TSP 2-opt Visualisation");
             switch (algo) {
                 case AlgorithmType::BRUTE_FORCE: {
                     TSP_Brute_Force solver(points, visualizer);

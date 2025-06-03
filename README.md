@@ -9,7 +9,7 @@ A C++ project for visualizing solutions to the **Travelling Salesman Problem (TS
   - Brute Force (Θ(n!))
   - Nearest Neighbor (Θ(n²))
   - Greedy (Θ(n² log n))
-  - 2-Opt (Worst-case O(n² · 2ⁿ), average-case O(n³) (empirical))
+  - 2-opt (Worst-case O(n² · 2ⁿ), average-case O(n³) (empirical))
 - Two input modes:
   - Manual coordinate input
   - Real-world Polish cities (via OpenRouteService API)
@@ -71,7 +71,7 @@ Greedy in coordinate input mode:
 
 Compile with this line:
 ```bash
-g++ main.cpp Point.cpp Point_Manager.cpp TSP_Brute_Force.cpp VisualizerController.cpp TSP_NN.cpp TSP_Greedy.cpp CityTSPRunner.cpp ConfigLoader.cpp OpenRouteServiceClient.cpp -o tsp_visualizer.exe -IC:\SFML\SFML-3.0.0\include -LC:\SFML\SFML-3.0.0\lib -lsfml-graphics -lsfml-window -lsfml-system -lopengl32 -lgdi32 -IC:\libs\curl\curl-8.13.0_2-win64-mingw\include -LC:\libs\curl\curl-8.13.0_2-win64-mingw\lib -lcurl -Iexternal
+g++ main.cpp Point.cpp Point_Manager.cpp TSP_Brute_Force.cpp VisualizerController.cpp TSP_NN.cpp TSP_Greedy.cpp TSP_2Opt.cpp CityTSPRunner.cpp ConfigLoader.cpp OpenRouteServiceClient.cpp -o tsp_visualizer.exe -IC:\SFML\include -LC:\SFML\lib -lsfml-graphics -lsfml-window -lsfml-system -lopengl32 -lgdi32 -IC:\libs\curl\include -LC:\libs\curl\lib -lcurl -Iexternal
 ```
 Then run:
 ```bash
