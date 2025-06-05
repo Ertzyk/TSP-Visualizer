@@ -117,8 +117,8 @@ void VisualizerController::sleep(int ms) {
 }
 
 void VisualizerController::loop_until_closed() {
-    while (window.isOpen()) {
-        if (auto event = window.pollEvent()) {
+    while(window.isOpen()){
+        if (auto event = window.pollEvent()){
             if (event->is<sf::Event::Closed>()) window.close();
         }
     }

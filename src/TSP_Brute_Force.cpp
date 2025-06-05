@@ -10,25 +10,20 @@ void TSP_Brute_Force::tsp_recursive(std::vector<bool>& visited, int current, int
     if (count == points.size()) {
         cost += points[current].distance_to(points[0]);
         if (path.size() > 2 && path[1] > path.back()) return;
-        for (size_t i = 1; i < path.size(); ++i) {
-            visualizer.draw_line(path[i - 1], path[i], sf::Color::Red);
-        }
+        for(size_t i = 1; i < path.size(); i++) visualizer.draw_line(path[i - 1], path[i], sf::Color::Red);
         visualizer.draw_line(path.back(), path[0], sf::Color::Red);
         visualizer.render();
         visualizer.sleep(delayMs);
-        for (size_t i = 1; i < path.size(); ++i) {
-            visualizer.clear_line(path[i - 1], path[i]);
-        }
+        for(size_t i = 1; i < path.size(); i++) visualizer.clear_line(path[i - 1], path[i]);
         visualizer.clear_line(path.back(), path[0]);
-        if (cost < minDist) {
+        if(cost < minDist){
             minDist = cost;
             bestPath = path;
         }
         return;
     }
-
-    for (size_t i = 0; i < points.size(); ++i) {
-        if (!visited[i]) {
+    for (size_t i = 0; i < points.size(); i++) {
+        if(!visited[i]){
             visited[i] = true;
             path.push_back(i);
             tsp_recursive(visited, i, count + 1, cost + points[current].distance_to(points[i]), path);
@@ -58,13 +53,13 @@ double TSP_Brute_Force::solve() {
     auto start = std::chrono::high_resolution_clock::now();
     tsp_recursive(visited, 0, 1, 0.0, path);
     auto end = std::chrono::high_resolution_clock::now();
-    for (size_t i = 1; i < bestPath.size(); ++i) {
+    for (size_t i = 1; i < bestPath.size(); i++) {
         visualizer.draw_line(bestPath[i - 1], bestPath[i], sf::Color::Green);
     }
     visualizer.draw_line(bestPath.back(), bestPath[0], sf::Color::Green);
     visualizer.render();
     std::chrono::duration<double> duration = end - start;
-    std::cout << "Execution time (no delay): " << duration.count() << " seconds\n";
+    std::cout << "Execution time: " << duration.count() << " seconds\n";
     return minDist;
 }
 
