@@ -1,7 +1,4 @@
-<p>
-  <img src="assets/tsp_logo.png" alt="TSP Logo" width="40" style="vertical-align: middle; border-radius: 50%;"/>
-  <strong style="font-size: 2em; vertical-align: middle;">TSP-Visualizer</strong>
-</p>
+# TSP-Visualizer
 
 A C++ project for visualizing solutions to the **Travelling Salesman Problem (TSP)** using **SFML**, with support for both coordinate-based points and real-world cities in Poland.
 
