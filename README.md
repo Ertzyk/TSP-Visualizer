@@ -1,5 +1,5 @@
 <p>
-  <img src="assets/tsp_logo_circle.png" alt="TSP Logo" width="40" style="vertical-align: middle; border-radius: 50%;"/>
+  <img src="assets/tsp_logo.png" alt="TSP Logo" width="40" style="vertical-align: middle; border-radius: 50%;"/>
   <strong style="font-size: 2em; vertical-align: middle;">TSP-Visualizer</strong>
 </p>
 
