@@ -1,4 +1,6 @@
-![Logo](assets/tsp_preview.jpg)
+<p align="center">
+  <img src="assets/tsp_preview.jpg" alt="TSP Logo" width="80" style="border-radius: 50%;">
+</p>
 
 # TSP-Visualizer
 
