@@ -8,6 +8,7 @@ A C++ project for visualizing solutions to the **Travelling Salesman Problem (TS
 - Interactive visualization of TSP algorithms:
   - Exact Algorithms:
     - [Brute Force](https://en.wikipedia.org/wiki/Brute-force_search) (Θ(n!))
+    - ~~[Held-Karp](https://en.wikipedia.org/wiki/Held%E2%80%93Karp_algorithm) (Θ(n² · 2ⁿ))~~ — *Planned*
   - Heuristic Algorithms:
     - [Nearest Neighbor](https://en.wikipedia.org/wiki/Nearest_neighbour_algorithm) (Θ(n²))
     - [Greedy](https://www.youtube.com/watch?v=nYKsLRxIBmA) (Θ(n² log n))
@@ -89,18 +90,45 @@ Follow the terminal prompts to:
 
 ## Project Structure
 ```
-src/
-├── assets/                  # Background map
-│   └── poland_map.png
-├── external/               # Third-party headers
-│   └── nlohmann/json.hpp
-├── config.json             # (Your API key — NOT COMMITTED)
-├── config.example.json     # Public template for config
-├── main.cpp
-├── TSP_*.cpp               # Algorithms
-└── ...                     # Core logic and visualization
+├── README.md
+├── LICENSE
+├── .gitignore
+├── config.example.json
+├── assets/  
+│   ├── 2-opt_demo.gif
+│   ├── demo_brute_force.gif
+│   ├── greedy_demo.gif
+│   └── NN_demo.gif
+└── src/
+    ├── main.cpp
+    ├── AlgorithmType.h
+    ├── CityTSPRunner.cpp
+    ├── CityTSPRunner.h
+    ├── ConfigLoader.cpp
+    ├── ConfigLoader.h
+    ├── HashUtils.h
+    ├── OpenRouteServiceClient.cpp
+    ├── OpenRouteServiceClient.h
+    ├── Point.cpp
+    ├── Point.h
+    ├── Point_Manager.cpp
+    ├── Point_Manager.h
+    ├── TSP_2Opt.cpp
+    ├── TSP_2Opt.h
+    ├── TSP_Brute_Force.cpp
+    ├── TSP_Brute_Force.h
+    ├── TSP_Greedy.cpp
+    ├── TSP_Greedy.h
+    ├── TSP_NN.cpp
+    ├── TSP_NN.h
+    ├── VisualizerController.cpp
+    ├── VisualizerController.h
+    ├── assets/
+    │   └── poland_map.jpg
+    └── external/
+        └── nlohmann/
+            └── json.hpp
 ```
----
 
 ## External Libraries Used
 
