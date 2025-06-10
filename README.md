@@ -6,10 +6,12 @@ A C++ project for visualizing solutions to the **Travelling Salesman Problem (TS
 
 ## Features
 - Interactive visualization of TSP algorithms:
-  - [Brute Force](https://en.wikipedia.org/wiki/Brute-force_search) (Θ(n!))
-  - [Nearest Neighbor](https://en.wikipedia.org/wiki/Nearest_neighbour_algorithm) (Θ(n²))
-  - [Greedy](https://www.youtube.com/watch?v=nYKsLRxIBmA) (Θ(n² log n))
-  - [2-opt](https://en.wikipedia.org/wiki/2-opt) (Worst-case O(n² · 2ⁿ), average-case O(n³) (empirical))
+  - Exact Algorithms:
+    - [Brute Force](https://en.wikipedia.org/wiki/Brute-force_search) (Θ(n!))
+  - Heuristic Algorithms:
+    - [Nearest Neighbor](https://en.wikipedia.org/wiki/Nearest_neighbour_algorithm) (Θ(n²))
+    - [Greedy](https://www.youtube.com/watch?v=nYKsLRxIBmA) (Θ(n² log n))
+    - [2-opt](https://en.wikipedia.org/wiki/2-opt) (Worst-case O(n² · 2ⁿ), average-case O(n³) (empirical))
 - Two input modes:
   - Manual coordinate input
   - Real-world Polish cities (via OpenRouteService API)
