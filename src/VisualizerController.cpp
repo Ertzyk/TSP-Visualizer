@@ -10,6 +10,8 @@ VisualizerController::VisualizerController(const std::vector<Point>& pts, const 
     sf::VideoMode desktop = sf::VideoMode::getDesktopMode();
     int centerX = static_cast<int>((desktop.size.x - 1000)/2);
     window.setPosition(sf::Vector2i(centerX, 0));
+
+    // Check if real-world mode is activated to load static map background
     if (title.find("(Cities)") != std::string::npos) {
         if (!backgroundTexture.loadFromFile("assets/poland_map.png")) {
             throw std::runtime_error("Failed to load background image");
@@ -23,13 +25,20 @@ VisualizerController::VisualizerController(const std::vector<Point>& pts, const 
     window.requestFocus();
 }
 
+// Computes the dynamic bounding box to ensure all points fit on screen.
+// Handles Cartesian coordinate mapping, particularly inverting the Y-axis 
+// for abstract coordinate mode so standard geometry (0,0 at bottom left) works visually.
 void VisualizerController::configure_view() {
     if (points.empty()) return;
+
+    // Static map view configuration
     if (hasBackground) {
         view = sf::View(sf::FloatRect(sf::Vector2f(0.f, 0.f), sf::Vector2f(1000.f, 1000.f)));
         view.setViewport({sf::Vector2f(0.f, 0.f), sf::Vector2f(1.f, 1.f)});
         return;
     }
+
+    // Dynamic coordinate view configuration (calculates bounding box + 20% margin)
     float minX = points[0].x, maxX = points[0].x;
     float minY = points[0].y, maxY = points[0].y;
     for (const auto& p : points) {
@@ -45,6 +54,8 @@ void VisualizerController::configure_view() {
     sf::FloatRect bounds(sf::Vector2f(minX - marginX, minY - marginY), sf::Vector2f(width + 2 * marginX, height + 2 * marginY));
     view = sf::View(bounds);
     view.setViewport({sf::Vector2f(0.f, 0.f), sf::Vector2f(1.f, 1.f)});
+
+    // SFML's default Y-axis points downward. Invert it for abstract math visualization.
     if (!hasBackground) {
         sf::Vector2f flippedSize = view.getSize();
         flippedSize.y = -std::abs(flippedSize.y);
@@ -68,6 +79,7 @@ void VisualizerController::set_point_color(int index, sf::Color color) {
     pointColors[index] = color;
 }
 
+// Dynamically scales point size based on the window's view dimension to maintain visibility
 void VisualizerController::draw_points() {
     float scale = std::min(view.getSize().x, std::abs(view.getSize().y)) * 0.005f;
     for (size_t i = 0; i < points.size(); ++i) {
@@ -90,12 +102,14 @@ void VisualizerController::draw_lines() {
     }
 }
 
+// Main render pipeline utilizing double-buffering (clear -> draw -> display)
 void VisualizerController::render() {
     window.clear(sf::Color::Black);
     if (hasBackground && backgroundSprite.has_value()) {
         window.draw(*backgroundSprite);
     }
     if (!hasBackground) {
+        // Draw standard Cartesian axes for abstract mode
         sf::Vertex xAxis[] = {
             {sf::Vector2f(-10000.f, 0.f), sf::Color(100, 100, 100)},
             {sf::Vector2f(10000.f, 0.f), sf::Color(100, 100, 100)}

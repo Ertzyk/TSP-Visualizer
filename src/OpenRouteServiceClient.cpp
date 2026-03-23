@@ -10,6 +10,7 @@ using json = nlohmann::json;
 OpenRouteServiceClient::OpenRouteServiceClient(const std::string& key) : apiKey(key) {}
 
 namespace {
+    // Standard libcurl write callback. Appends incoming network byte chunks to a std::string buffer.
     size_t WriteCallback(void* contents, size_t size, size_t nmemb, std::string* output) {
         size_t totalSize = size * nmemb;
         output->append((char*)contents, totalSize);
@@ -17,6 +18,7 @@ namespace {
     }
 }
 
+// Geocoding wrapper: Converts a list of human-readable city names into Latitude/Longitude points.
 std::vector<std::pair<double, double>> OpenRouteServiceClient::get_coordinates(const std::vector<std::string>& cityNames) {
     std::vector<std::pair<double, double>> coordinates;
     for (const auto& city : cityNames) {
@@ -55,6 +57,7 @@ std::vector<std::pair<double, double>> OpenRouteServiceClient::get_coordinates(c
     return coordinates;
 }
 
+// Builds the N x N adjacency matrix representing driving durations between all points
 std::vector<std::vector<double>> OpenRouteServiceClient::get_duration_matrix(const std::vector<std::pair<double, double>>& coords) {
     CURL* curl = curl_easy_init();
     if (!curl) throw std::runtime_error("Failed to initialize CURL");

@@ -14,12 +14,18 @@ double TSP_NN::solve(){
     path.push_back(current);
     visualizer.render();
     visualizer.sleep(1000);
+
+    // Construct the path by finding the closest unvisited neighbor for the current node
     for(int step = 1; step < n; step++){
         int next = -1;
         double bestDist = std::numeric_limits<double>::max();
+
+        // Scan all points to find the local optimum
         for (int i = 0; i < n; i++) {
             if (!visited[i]) {
                 double dist = points[current].distance_to(points[i]);
+
+                // Visualization: Show candidate edges in Red
                 visualizer.draw_line(current, i, sf::Color::Red);
                 visualizer.render();
                 visualizer.sleep(180);
@@ -32,9 +38,13 @@ double TSP_NN::solve(){
                 }
             }
         }
+
+        // Commit to the closest neighbor
         if (next != -1) {
             visited[next] = true;
             totalDistance += bestDist;
+
+            // Visualization: Lock in the chosen edge in Green
             visualizer.draw_line(current, next, sf::Color::Green);
             path.push_back(next);
             current = next;
@@ -42,6 +52,8 @@ double TSP_NN::solve(){
             visualizer.sleep(300);
         }
     }
+
+    // Hamiltonian cycle closure: Connect the last visited node back to the start
     path.push_back(path[0]);
     totalDistance += points[current].distance_to(points[path[0]]);
     visualizer.draw_line(current, path[0], sf::Color::Green);

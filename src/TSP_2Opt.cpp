@@ -4,6 +4,8 @@
 #include <chrono>
 #include <numeric> 
 
+// Lightweight 2D vector struct used specifically for fast cross-product calculations
+// to determine line segment intersections without floating-point division.
 struct pt {
     double x, y;
     pt(double x = 0, double y = 0) : x(x), y(y) {}
@@ -20,6 +22,9 @@ static bool inter1(double a, double b, double c, double d) {
     return std::max(a, c) <= std::min(b, d);
 }
 
+// Core geometry utility: Determines if edge AB intersects edge CD.
+// In Euclidean TSP, uncrossing intersecting edges guarantees a shorter total tour length
+// due to the triangle inequality.
 static bool segments_intersect(const Point &A, const Point &B, const Point &C, const Point &D) {
     pt a(A.x, A.y), b(B.x, B.y), c(C.x, C.y), d(D.x, D.y);
     if (c.cross(a, d) == 0 && c.cross(b, d) == 0) return inter1(a.x, b.x, c.x, d.x) && inter1(a.y, b.y, c.y, d.y);
@@ -42,6 +47,8 @@ void TSP_2Opt::randomize_path() {
     std::shuffle(path.begin() + 1, path.end(), rng);
 }
 
+// Iterates through all pairs of non-adjacent edges. If they intersect, it reverses the 
+// sub-tour between them, effectively "uncrossing" the edges and improving the route.
 bool TSP_2Opt::perform_2opt_swap(){
     const int n = static_cast<int>(path.size());
     for (int i = 0; i < n - 1; ++i) {
@@ -51,22 +58,25 @@ bool TSP_2Opt::perform_2opt_swap(){
             int c = path[j];
             int d = path[(j + 1) % n];
             if (segments_intersect(points[a], points[b], points[c], points[d])) {
+                // Visualization hooks: Highlight the intersecting edges in red before swapping
                 visualizer.clear_all_lines();
                 visualizer.update_path(path);
                 visualizer.draw_line(a, b, sf::Color::Red);
                 visualizer.draw_line(c, d, sf::Color::Red);
                 visualizer.render();
                 visualizer.sleep(200);
+
+                // Execute the 2-Opt swap by reversing the path segment between the edges
                 std::reverse(path.begin() + i + 1, path.begin() + j + 1);
                 visualizer.clear_all_lines();
                 visualizer.update_path(path);
                 visualizer.render();
                 visualizer.sleep(200);
-                return true;
+                return true; // Found and executed an improvement
             }
         }
     }
-    return false;
+    return false; // Local optimum reached, no intersecting edges found
 }
 
 double TSP_2Opt::tour_length() const {
@@ -82,6 +92,8 @@ double TSP_2Opt::solve() {
     randomize_path();
     visualizer.update_path(path);
     visualizer.sleep(1000);
+
+    // Continuously apply 2-Opt swaps until no further improvements can be made
     while(true){
         visualizer.update_path(path);
         visualizer.sleep(100);
