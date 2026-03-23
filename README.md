@@ -71,16 +71,29 @@ Greedy in coordinate input mode:
 
 ---
 
-## Running the Program
+## Building and Running
+This project uses CMake for cross-platform building.
+```bash
+# Clone the repository
+git clone [https://github.com/Ertzyk/TSP-Visualizer.git](https://github.com/Ertzyk/TSP-Visualizer.git)
+cd TSP-Visualizer
 
-Compile with this line:
-```bash
-g++ main.cpp Point.cpp Point_Manager.cpp TSP_Brute_Force.cpp VisualizerController.cpp TSP_NN.cpp TSP_Greedy.cpp TSP_2Opt.cpp CityTSPRunner.cpp ConfigLoader.cpp OpenRouteServiceClient.cpp -o tsp_visualizer.exe -IC:\SFML\include -LC:\SFML\lib -lsfml-graphics -lsfml-window -lsfml-system -lopengl32 -lgdi32 -IC:\libs\curl\include -LC:\libs\curl\lib -lcurl -Iexternal
+# Create a build directory and configure the project
+mkdir build
+cd build
+cmake ..
+
+# Compile the code
+cmake --build .
+
+# Navigate back to the root directory (required to load assets properly)
+cd ..
+
+# Run the visualizer 
+./build/tsp_visualizer      # Linux/macOS
+.\build\tsp_visualizer.exe  # Windows
 ```
-Then run:
-```bash
-./tsp_visualizer.exe
-```
+
 
 Follow the terminal prompts to:
 - Choose input mode (coordinates or cities)
@@ -91,44 +104,17 @@ Follow the terminal prompts to:
 
 ## Project Structure
 ```
-├── README.md
-├── LICENSE
-├── .gitignore
-├── config.example.json
-├── assets/  
-│   ├── 2-opt_demo.gif
-│   ├── demo_brute_force.gif
-│   ├── greedy_demo.gif
-│   └── NN_demo.gif
-└── src/
-    ├── main.cpp
-    ├── AlgorithmType.h
-    ├── CityTSPRunner.cpp
-    ├── CityTSPRunner.h
-    ├── ConfigLoader.cpp
-    ├── ConfigLoader.h
-    ├── HashUtils.h
-    ├── OpenRouteServiceClient.cpp
-    ├── OpenRouteServiceClient.h
-    ├── Point.cpp
-    ├── Point.h
-    ├── Point_Manager.cpp
-    ├── Point_Manager.h
-    ├── TSP_2Opt.cpp
-    ├── TSP_2Opt.h
-    ├── TSP_Brute_Force.cpp
-    ├── TSP_Brute_Force.h
-    ├── TSP_Greedy.cpp
-    ├── TSP_Greedy.h
-    ├── TSP_NN.cpp
-    ├── TSP_NN.h
-    ├── VisualizerController.cpp
-    ├── VisualizerController.h
-    ├── assets/
-    │   └── poland_map.jpg
-    └── external/
-        └── nlohmann/
-            └── json.hpp
+├── assets/                  # Demo gifs for the README
+├── src/                     # Core source code
+│   ├── main.cpp             # Entry point
+│   ├── TSP_* # Algorithm implementations (Brute Force, NN, Greedy, 2-Opt)
+│   ├── OpenRouteService* # API client for real-world city coordinate fetching
+│   ├── Visualizer* # SFML rendering and UI controllers
+│   ├── assets/              # Runtime assets (e.g., poland_map.jpg)
+│   └── external/            # Third-party dependencies (nlohmann json)
+├── CMakeLists.txt           # Build configuration
+├── config.example.json      # API key template
+└── README.md
 ```
 
 ## External Libraries Used
